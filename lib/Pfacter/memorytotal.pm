@@ -76,6 +76,18 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/etc/hw' ) {
+                open( F, '/etc/hw mem |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    if ( /ExtMem:\s+(\d+(\.\d+)\s+\w+)/ ) { $r = $1; last; }
+                }
+            }
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

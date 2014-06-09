@@ -9,9 +9,12 @@ sub pfact {
     my ( $r );
 
     for ( $p->{'kernel'} ) {
-        /AIX|Darwin|FreeBSD|Linux|SunOS/ && do {
+        /AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV/ && do {
             if ( -e '/bin/hostname' ) {
                 $r = qx( /bin/hostname );
+                $r = $1 if $r =~ /^(\w+)\..*$/;
+            } elsif ( -e '/usr/bin/hostname' ) {
+                $r = qx( /usr/bin/hostname );
                 $r = $1 if $r =~ /^(\w+)\..*$/;
             }
         };

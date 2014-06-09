@@ -48,6 +48,21 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/etc/swap' ) {
+                open( F, '/etc/swap -l |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    next if ( /path/ );
+                    @items=split(/\s+/);
+                    $r += $items[3];
+                }
+                $r /= 2;
+            }
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

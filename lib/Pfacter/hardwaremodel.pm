@@ -9,7 +9,7 @@ sub pfact {
     my ( $r );
 
     for ( $p->{'kernel'} ) {
-        /AIX|Darwin|FreeBSD|Linux|SunOS/ && do {
+        /AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV/ && do {
             if ( -e '/bin/uname' )    { $r = qx( /bin/uname -m ); }
             if ( -e '/usr/bin/uname' ) { $r = qx( /usr/bin/uname -m ); }
         };

@@ -74,6 +74,20 @@ sub pfact {
             $r = join ( ' ', sort @fs );
         };
 
+        /SCO_SV/ && do {
+            my ( @l, @fs );
+
+            if ( -e '/etc/mount' ) {
+                open( F, '/etc/mount -l |' );
+                foreach ( <F> ) {
+                    @l = split( / /, $_ );
+                    push @fs, "$l[0]=$l[2]" if $l[0] ne '/stand';
+                }
+                close( F );
+            }
+            $r = join ( ' ', sort @fs );
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

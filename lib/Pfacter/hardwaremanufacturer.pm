@@ -60,6 +60,18 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/etc/hw' ) {
+                open( F, '/etc/hw bus |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    if ( /\s+SubsysVendorID:\s+(.+)/ ) { $r = $1; last; }
+                }
+            };
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

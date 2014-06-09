@@ -9,6 +9,8 @@ sub pfact {
     # Check for FQDN hostname first
     if ( -e '/bin/hostname' ) {
         return( $1 ) if qx( /bin/hostname ) =~ /\w+\.(.+?\.[a-z]{3})$/;
+    } elsif ( -e '/usr/bin/hostname' ) {
+        return( $1 ) if qx( /usr/bin/hostname ) =~ /\w+\.(.+?\.[a-z]{3})$/;
     }
 
     my ( $r );

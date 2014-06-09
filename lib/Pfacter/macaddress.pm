@@ -52,6 +52,24 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            my ( $d, @i );
+
+            if ( -e '/etc/ifconfig' ) {
+                open( F, '/etc/ifconfig -a |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    $d = $1 if /^(\w+)\:/;
+                    push @i, "$d=$1"
+                        if /ether\s+(\w+\:\w+\:\w+\:\w+\:\w+\:\w+)/;
+                }
+                $r = join ' ', sort @i;
+            };
+        };
+
+        
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

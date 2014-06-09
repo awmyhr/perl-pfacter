@@ -33,6 +33,10 @@ sub pfact {
             $r = 'Solaris';
         };
 
+        /SCO_SV/ && do {
+            $r = 'SCO UNIX';
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

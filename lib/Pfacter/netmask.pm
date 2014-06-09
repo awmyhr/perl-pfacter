@@ -5,7 +5,7 @@ package Pfacter::netmask;
 sub pfact {
     my $self  = shift;
     my ( $p ) = shift->{'pfact'};
-
+print "HELLO\n\n";
     my ( $r );
 
     for ( $p->{'kernel'} ) {
@@ -32,6 +32,27 @@ sub pfact {
                 $r = join ' ', sort @i;
             }
         };
+
+#        /SCO_SV/ && do {
+#            if ( -e '/etc/ifconfig' ) {
+#                open( F, '/etc/ifconfig -a |' );
+#                my ( @F ) = <F>;
+#                close( F );
+
+#                my ( $d, @i );
+
+#                foreach ( @F ) {
+#                    $d = $1 if /^(\w+)\:/;
+
+#                    if ( /netmask\s+([\da-f]+)/ ) {
+#                        #push @i, "$d=" . join( '.', map { hex } unpack( '(A2)*', $1 ) );
+#                        push @i, "$d=$1";
+#                    }
+#                };
+#                
+#                $r = join ' ', sort @i;
+#            }
+#        };
 
         /Linux/ && do {
             if ( -e '/sbin/ifconfig' ) {

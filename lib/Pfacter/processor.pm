@@ -59,6 +59,18 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/etc/hw' ) {
+                open( F, '/etc/hw cpu |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    if ( /\s+[a]\s+(.+)/ ) { $r = $1; last; }
+                }
+            };
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

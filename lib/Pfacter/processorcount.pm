@@ -49,6 +49,18 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/bin/uname' ) {
+                open( F, '/bin/uname -X |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                foreach ( @F ) {
+                    if ( /NumCPU\s=\s(.*)/ ) { $r = $1; last; }
+                }
+            }
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

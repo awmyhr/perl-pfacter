@@ -91,6 +91,22 @@ sub pfact {
             }
         };
 
+        /SCO_SV/ && do {
+            if ( -e '/etc/fdisk' ) {
+                open( F, '/etc/fdisk -p 2> /dev/null |' );
+                my ( @F ) = <F>;
+                close( F );
+
+                my ( @i );
+
+                foreach ( @F ) {
+                    push @i, $_;
+                }
+
+                $r = join ' ', sort @i;
+            }
+        };
+
         if ( $r ) { return( $r ); }
         else      { return( 0 ); }
     }

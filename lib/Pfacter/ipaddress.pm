@@ -9,7 +9,7 @@ sub pfact {
     my ( $r );
 
     for ( $p->{'kernel'} ) {
-        /AIX|Darwin|FreeBSD|SunOS/ && do {
+        /AIX|Darwin|FreeBSD|SunOS|SCO_SV/ && do {
             my ( $c );
 
             $c = '/etc/ifconfig -a |'  if -e '/etc/ifconfig';
