@@ -1,3 +1,104 @@
+Release 2.x Modules (for Facter 2.x):
+
+architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+augeasversion
+blockdevice_{devicename}_size
+blockdevice_{devicename}_vendor
+blockdevice_{devicename}_model
+blockdevices
+boardmanufacturer
+boardproductname
+boardserialnumber
+cfkey
+domain                  all AIX|Linux|SunOS
+ec2_{EC2 INSTANCE DATA}
+ec2_userdata
+facterversion
+filesystems             AIX|Darwin|Linux|SunOS|SCO_SV
+ldom
+fqdn                    all
+gid
+hardwareisa
+hardwaremodel
+hostname
+id
+interfaces
+ipaddress
+ipaddress_{NETWORK INTERFACE}
+ipaddress6
+ipaddress6_{NETWORK INTERFACE}
+iphostnumber
+is_virtual
+kernel
+kernelmajversion
+kernelrelease
+kernelversion
+lsbdistcodename
+lsbdistdescription
+lsbdistid
+lsbdistrelease
+lsbmajdistrelease
+lsbminordistrelease
+lsbrelease
+macaddress
+macaddress_{NETWORK INTERFACE}
+macosx_buildversion
+macosx_productname
+macosx_productversion
+macosx_productversion_major
+macosx_productversion_minor
+manufacturer
+memoryfree
+memorysize
+netmask
+netmask_{NETWORK INTERFACE}
+network_{NETWORK INTERFACE}
+operatingsystem
+operatingsystemmajrelease
+operatingsystemrelease
+osfamily
+path
+physicalprocessorcount
+processor
+processor{NUMBER}
+processorcount
+productname
+ps
+puppetversion
+rubysitedir
+rubyversion
+selinux
+selinux_config_mode
+selinux_config_policy
+selinux_current_mode
+selinux_enforced
+selinux_policyversion
+serialnumber
+sp_{SYSTEM PROFILER DATA}
+sshdsakey
+sshecdsakey
+sshrsakey
+swapencrypted
+swapfree
+swapsize
+timezone
+type
+uniqueid
+uptime
+uptime_days
+uptime_hours
+uptime_seconds
+uuid
+virtual
+vlans
+xendomains
+zfs_version
+zonename
+zones
+zpool_version
+
+
+Original (1.x) Modules (for Facter pre-2.0):
 
 architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 disk                    AIX|Darwin|Linux|SCO_SV*
@@ -26,5 +127,6 @@ serialnumber            AIX|Darwin|Linux
 swap                    AIX|Darwin|Linux|SunOS|SCO_SV
 uniqueid                AIX|Linux|SunOS
 
-
 (*) partially working/needs additional work
+
+

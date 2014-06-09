@@ -117,9 +117,17 @@ Connect securely (with SSL, obviously) to the LDAP server.
 
 Print all output in XML format.
 
+=item --json
+
+Print all output in JSON format.
+
 =item --yaml
 
 Print all output in YAML format.
+
+=item --ver1
+
+Use the older 1.x base list of facts.
 
 =back
 
@@ -181,6 +189,8 @@ C<< perl -MCPAN -e 'install Pfacter' >>
 
 =head1 AUTHOR
 
-Scott Schneider <sschneid@gmail.com>
+Original: Scott Schneider <sschneid@gmail.com>
+
+This Fork: awmyhr <awmyhr@gmail.com>
 
 =cut

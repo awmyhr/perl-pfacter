@@ -218,7 +218,8 @@ sub init {
         'write'        => \$self->{'var'}->{'write'},
         'xml'          => \$self->{'var'}->{'xml'},
         'json'         => \$self->{'var'}->{'json'},
-        'yaml'         => \$self->{'var'}->{'yaml'}
+        'yaml'         => \$self->{'var'}->{'yaml'},
+        'ver1'         => \$self->{'var'}->{'ver1'}
     ) || { $self->{'var'}->{'help'} = 1 };
 
     # Read configuration from a file if --configfile specified
@@ -374,7 +375,7 @@ sub init {
         $self->debug( "No modules specified; using defaults" );
 
         use Pfacter;
-        @ARGV = Pfacter->modulelist( $self->{'pfact'}->{'kernel'} );
+        @ARGV = Pfacter->modulelist( $self->{'pfact'}->{'kernel'}, $self->{'var'}->{'ver1'} );
 
         # Read in all facts in --moduledir if specified
         if ( $self->{'var'}->{'moduledir'} ) {
