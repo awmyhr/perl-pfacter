@@ -33,26 +33,26 @@ sub pfact {
             }
         };
 
-#        /SCO_SV/ && do {
-#            if ( -e '/etc/ifconfig' ) {
-#                open( F, '/etc/ifconfig -a |' );
-#                my ( @F ) = <F>;
-#                close( F );
+        /SCO_SV/ && do {
+            if ( -e '/etc/ifconfig' ) {
+                open( F, '/etc/ifconfig -a |' );
+                my ( @F ) = <F>;
+                close( F );
 
-#                my ( $d, @i );
+                my ( $d, @i );
 
-#                foreach ( @F ) {
-#                    $d = $1 if /^(\w+)\:/;
+                foreach ( @F ) {
+                    $d = $1 if /^(\w+)\:/;
 
-#                    if ( /netmask\s+([\da-f]+)/ ) {
-#                        #push @i, "$d=" . join( '.', map { hex } unpack( '(A2)*', $1 ) );
-#                        push @i, "$d=$1";
-#                    }
-#                };
-#                
-#                $r = join ' ', sort @i;
-#            }
-#        };
+                    if ( /netmask\s+([\da-f]+)/ ) {
+                        #push @i, "$d=" . join( '.', map { hex } unpack( '(A2)*', $1 ) );
+                        push @i, "$d=$1";
+                    }
+                };
+                
+                $r = join ' ', sort @i;
+            }
+        };
 
         /Linux/ && do {
             if ( -e '/sbin/ifconfig' ) {

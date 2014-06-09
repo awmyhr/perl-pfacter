@@ -17,7 +17,7 @@ localtime               all
 macaddress              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 memory                  AIX|Darwin|Linux|SunOS
 memorytotal             AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
-netmask                 Darwin|Linux|SCO_SV*
+netmask                 Darwin|Linux|SCO_SV
 operatingsystem         AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 processor               AIX|Darwin|Linux|SunOS|SCO_SV
 processorcount          AIX|FreeBSD|Linux|SunOS|SCO_SV
