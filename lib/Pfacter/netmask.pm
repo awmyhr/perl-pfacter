@@ -5,7 +5,7 @@ package Pfacter::netmask;
 sub pfact {
     my $self  = shift;
     my ( $p ) = shift->{'pfact'};
-print "HELLO\n\n";
+
     my ( $r );
 
     for ( $p->{'kernel'} ) {

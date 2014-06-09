@@ -16,7 +16,7 @@ BEGIN { unshift @INC, './lib'; }
 # FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 # details.
 
-our $VERSION = '1.13';
+our $VERSION = '1.14';
 
 
 
@@ -30,6 +30,8 @@ use strict;
 my $self = pfacter->init();
 
 $self->debug( "Output module list: [ @ARGV ]" );
+
+if ( $self->{'var'}->{'json'} ) { print "{\n"; }
 
 foreach ( @ARGV ) {
     $self->{'pfact'}->{$_} = $self->pfact( $_ ) || next;
@@ -50,7 +52,22 @@ foreach ( @ARGV ) {
         }
         print "</fact>\n";
     }
-    else {
+    elsif ( $self->{'var'}->{'json'} ) {
+        my $c = $self->{'var'}->{'json'} ? ': ' : ' => ';
+        if (
+            ( $self->{'var'}->{'multi'} )
+         && ( $self->{'pfact'}->{$_} =~ /.+?\=.+?\s.+?\=.+?/ )
+        ) {
+            my @facts = split / /, $self->{'pfact'}->{$_};
+            foreach my $fact ( @facts ) {
+                print '  "' . $_ . '"' . $c . '"' . $fact . '",' . "\n";
+            }
+        }
+        else {
+            print '  "' . $_ . '"' . $c . '"' . $self->{'pfact'}->{$_} . '",' . "\n";
+        }
+
+    } else  {
         my $c = $self->{'var'}->{'yaml'} ? ': ' : ' => ';
         if (
             ( $self->{'var'}->{'multi'} )
@@ -66,6 +83,7 @@ foreach ( @ARGV ) {
         }
     }
 }
+if ( $self->{'var'}->{'json'} ) { print '  "facterversion": "p' . $VERSION . '"' . "\n}"; }
 
 # Fetch the LDAP entry to compare against if writing
 if ( $self->{'var'}->{'write'} ) {
@@ -199,6 +217,7 @@ sub init {
         'version'      => \$self->{'var'}->{'version'},
         'write'        => \$self->{'var'}->{'write'},
         'xml'          => \$self->{'var'}->{'xml'},
+        'json'         => \$self->{'var'}->{'json'},
         'yaml'         => \$self->{'var'}->{'yaml'}
     ) || { $self->{'var'}->{'help'} = 1 };
 
