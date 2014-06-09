@@ -1,0 +1,30 @@
+
+architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+disk                    AIX|Darwin|Linux|SCO_SV*
+domain                  all AIX|Linux|SunOS
+filesystems             AIX|Darwin|Linux|SunOS|SCO_SV
+fqdn                    all
+hardwaremanufacturer    AIX|Linux|SunOS|SCO_SV*
+hardwaremodel           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+hardwareplatform        AIX|Darwin|Linux|SunOS|SCO_SV
+hardwareproduct         Darwin|Linux|SunOS
+hostname                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+ipaddress               AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernel                  all
+kernelrelease           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernelversion           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+localtime               all
+macaddress              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+memory                  AIX|Darwin|Linux|SunOS
+memorytotal             AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+netmask                 Darwin|Linux|SCO_SV*
+operatingsystem         AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+processor               AIX|Darwin|Linux|SunOS|SCO_SV
+processorcount          AIX|FreeBSD|Linux|SunOS|SCO_SV
+productid               Linux|SCO_SV
+serialnumber            AIX|Darwin|Linux
+swap                    AIX|Darwin|Linux|SunOS|SCO_SV
+uniqueid                AIX|Linux|SunOS
+
+
+(*) partially working/needs additional work
