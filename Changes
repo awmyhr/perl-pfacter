@@ -1,5 +1,9 @@
 Revision history for pfacter
 
+1.14
+* Mon Jun 09 2014 awmyhr <awmyhr@gmail.com>
+- Added SCO support for most modules
+
 1.13
 * Tue May 20 2008 Scott Schneider <sschneid@gmail.com>
 - Added filesystems (per Christopher Horton), productid and swap facts
