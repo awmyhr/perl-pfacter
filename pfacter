@@ -83,7 +83,7 @@ foreach ( @ARGV ) {
         }
     }
 }
-if ( $self->{'var'}->{'json'} ) { print '  "facterversion": "p' . $VERSION . '"' . "\n}"; }
+if ( $self->{'var'}->{'json'} ) { print '  "facterversion": "p' . $VERSION . '"' . "\n}\n"; }
 
 # Fetch the LDAP entry to compare against if writing
 if ( $self->{'var'}->{'write'} ) {
