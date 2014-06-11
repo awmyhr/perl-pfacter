@@ -96,10 +96,13 @@ foreach ( @ARGV ) {
     }
 }
 if ( $self->{'var'}->{'json'} && $self->{'var'}->{'wire2'} ) {
+    print '    "clientcert": "' . $self->{'pfact'}->{'fqdn'} . '"' . ",\n";
     print '    "facterversion": "p' . $VERSION . '"' . "\n  }\n}\n";
 } elsif ( $self->{'var'}->{'json'} ) {
+    print '    "clientcert": "' . $self->{'pfact'}->{'fqdn'} . '"' . ",\n";
     print '    "facterversion": "p' . $VERSION . '"' . "\n}\n";
 } elsif ( $self->{'var'}->{'puppet'} ) {
+    print '    clientcert: ' . $self->{'pfact'}->{'fqdn'} . "\n";
     print '    facterversion: p' . $VERSION .  "\n";
     print '  name: ' . $self->{'pfact'}->{'fqdn'};
 }
