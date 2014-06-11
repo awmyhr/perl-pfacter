@@ -1,6 +1,6 @@
 package Pfacter;
 
-our $VERSION = '1.14';
+our $VERSION = 'p2.00b';
 
 sub modulelist {
     my $self   = shift;
@@ -8,7 +8,7 @@ sub modulelist {
     my $ver1   = shift;
     my @modules;
 
-    if ( $ver1 == 1 ) { 
+    if ( $ver1 == 1 ) {
         push @modules, qw(
 
             architecture
@@ -45,6 +45,7 @@ sub modulelist {
             domain
             filesystems
             fqdn
+            hardwareisa
             hardwaremodel
             hostname
             ipaddress
@@ -52,15 +53,23 @@ sub modulelist {
             kernelrelease
             kernelversion
             macaddress
+            manufacturer
+            memorysize
             netmask
             operatingsystem
+            operatingsystemrelease
+            osfamily
+            physicalprocessorcount
             processor
+            processor0
             processorcount
             serialnumber
+            swapsize
             uniqueid
+            uptime
         );
     }
-    
+
     # Kernel-specific
     for ( $kernel ) {
         /Linux/ && do {

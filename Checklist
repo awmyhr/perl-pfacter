@@ -1,7 +1,7 @@
 Release 2.x Modules (for Facter 2.x):
 
 architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
-augeasversion
+augeasversion           #na
 blockdevice_{devicename}_size
 blockdevice_{devicename}_vendor
 blockdevice_{devicename}_model
@@ -11,80 +11,81 @@ boardproductname
 boardserialnumber
 cfkey
 domain                  all AIX|Linux|SunOS
-ec2_{EC2 INSTANCE DATA}
-ec2_userdata
-facterversion
+ec2_{EC2 INSTANCE DATA} #na
+ec2_userdata            #na
+facterversion           #will return pfacter version, prefixed w/'p'
 filesystems             AIX|Darwin|Linux|SunOS|SCO_SV
 ldom
 fqdn                    all
 gid
-hardwareisa
-hardwaremodel
-hostname
+hardwareisa             AIX|Darwin|Linux|SunOS|SCO_SV
+hardwaremodel           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+hostname                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 id
 interfaces
-ipaddress
+ipaddress               AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
 ipaddress_{NETWORK INTERFACE}
 ipaddress6
 ipaddress6_{NETWORK INTERFACE}
 iphostnumber
 is_virtual
-kernel
+kernel                  all
 kernelmajversion
-kernelrelease
-kernelversion
-lsbdistcodename
-lsbdistdescription
-lsbdistid
+kernelrelease           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernelversion           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+lsbdistcodename         Linux
+lsbdistdescription      Linux
+lsbdistid               Linux
 lsbdistrelease
 lsbmajdistrelease
 lsbminordistrelease
-lsbrelease
-macaddress
+lsbrelease              Linux
+macaddress              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
 macaddress_{NETWORK INTERFACE}
 macosx_buildversion
 macosx_productname
 macosx_productversion
 macosx_productversion_major
 macosx_productversion_minor
-manufacturer
+manufacturer            AIX|Linux|SunOS|SCO_SV*
 memoryfree
-memorysize
-netmask
+memorysize              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+netmask                 Darwin|Linux|SCO_SV*
 netmask_{NETWORK INTERFACE}
 network_{NETWORK INTERFACE}
-operatingsystem
+operatingsystem         AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 operatingsystemmajrelease
-operatingsystemrelease
-osfamily
+operatingsystemrelease  SCO_SV
+osfamily                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
 path
-physicalprocessorcount
-processor
+physicalprocessorcount  AIX|FreeBSD|Linux|SunOS|SCO_SV*
+processor               AIX|Darwin|Linux|SunOS|SCO_SV
+processor0              AIX|Darwin|Linux|SunOS|SCO_SV*
 processor{NUMBER}
-processorcount
+processorcount          AIX|FreeBSD|Linux|SunOS|SCO_SV
 productname
 ps
 puppetversion
-rubysitedir
-rubyversion
+rubysitedir             #na
+rubyversion             #na
 selinux
 selinux_config_mode
 selinux_config_policy
 selinux_current_mode
 selinux_enforced
 selinux_policyversion
-serialnumber
+serialnumber            AIX|Darwin|Linux|SCO_SV
 sp_{SYSTEM PROFILER DATA}
 sshdsakey
 sshecdsakey
 sshrsakey
 swapencrypted
 swapfree
-swapsize
+swapsize                AIX|Darwin|Linux|SunOS|SCO_SV
 timezone
 type
-uniqueid
-uptime
+uniqueid                AIX|Linux|SunOS
+uptime                  AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
 uptime_days
 uptime_hours
 uptime_seconds

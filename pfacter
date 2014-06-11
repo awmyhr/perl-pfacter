@@ -16,7 +16,7 @@ BEGIN { unshift @INC, './lib'; }
 # FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 # details.
 
-our $VERSION = '1.14';
+our $VERSION = '2.00b';
 
 
 
@@ -31,7 +31,16 @@ my $self = pfacter->init();
 
 $self->debug( "Output module list: [ @ARGV ]" );
 
-if ( $self->{'var'}->{'json'} ) { print "{\n"; }
+if ( $self->{'var'}->{'json'} && $self->{'var'}->{'wire2'} ) {
+    print '{"name": "' . $self->pfact('fqdn') . '",' . "\n";
+    print ' "environment": "development",' . "\n";
+    print ' "values": {' . "\n";
+} elsif ( $self->{'var'}->{'json'} ) {
+    print "{\n";
+} elsif ( $self->{'var'}->{'puppet'} ) {
+    print '--- !ruby/object:Puppet::Node::Facts' . "\n";
+    print '  values:' . "\n";
+}
 
 foreach ( @ARGV ) {
     $self->{'pfact'}->{$_} = $self->pfact( $_ ) || next;
@@ -60,30 +69,40 @@ foreach ( @ARGV ) {
         ) {
             my @facts = split / /, $self->{'pfact'}->{$_};
             foreach my $fact ( @facts ) {
-                print '  "' . $_ . '"' . $c . '"' . $fact . '",' . "\n";
+                print '    "' . $_ . '"' . $c . '"' . $fact . '",' . "\n";
             }
         }
         else {
-            print '  "' . $_ . '"' . $c . '"' . $self->{'pfact'}->{$_} . '",' . "\n";
+            print '    "' . $_ . '"' . $c . '"' . $self->{'pfact'}->{$_} . '",' . "\n";
         }
 
     } else  {
         my $c = $self->{'var'}->{'yaml'} ? ': ' : ' => ';
+        my $c = $self->{'var'}->{'puppet'} ? ': ' : ' => ';
         if (
             ( $self->{'var'}->{'multi'} )
          && ( $self->{'pfact'}->{$_} =~ /.+?\=.+?\s.+?\=.+?/ )
         ) {
             my @facts = split / /, $self->{'pfact'}->{$_};
             foreach my $fact ( @facts ) {
+                if ( $self->{'var'}->{'puppet'} ) { print "    "; }
                 print $_ . $c . $fact . "\n";
             }
         }
         else {
+            if ( $self->{'var'}->{'puppet'} ) { print "    "; }
             print $_ . $c . $self->{'pfact'}->{$_} . "\n";
         }
     }
 }
-if ( $self->{'var'}->{'json'} ) { print '  "facterversion": "p' . $VERSION . '"' . "\n}\n"; }
+if ( $self->{'var'}->{'json'} && $self->{'var'}->{'wire2'} ) {
+    print '    "facterversion": "p' . $VERSION . '"' . "\n  }\n}\n";
+} elsif ( $self->{'var'}->{'json'} ) {
+    print '    "facterversion": "p' . $VERSION . '"' . "\n}\n";
+} elsif ( $self->{'var'}->{'puppet'} ) {
+    print '    facterversion: p' . $VERSION .  "\n";
+    print '  name: ' . $self->{'pfact'}->{'fqdn'};
+}
 
 # Fetch the LDAP entry to compare against if writing
 if ( $self->{'var'}->{'write'} ) {
@@ -218,7 +237,9 @@ sub init {
         'write'        => \$self->{'var'}->{'write'},
         'xml'          => \$self->{'var'}->{'xml'},
         'json'         => \$self->{'var'}->{'json'},
+        'wire2'        => \$self->{'var'}->{'wire2'},
         'yaml'         => \$self->{'var'}->{'yaml'},
+        'puppet'       => \$self->{'var'}->{'puppet'},
         'ver1'         => \$self->{'var'}->{'ver1'}
     ) || { $self->{'var'}->{'help'} = 1 };
 
@@ -280,7 +301,7 @@ sub init {
     # 3rd party modules
     if ( $self->{'var'}->{'moduledir'} ) {
         $self->debug( "Using moduledir $self->{'var'}->{'moduledir'}" );
-        
+
         if ( -d $self->{'var'}->{'moduledir'} ) {
             unshift @INC, $self->{'var'}->{'moduledir'};
         }
