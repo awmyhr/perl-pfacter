@@ -20,7 +20,7 @@ fqdn                    all
 gid
 hardwareisa             AIX|Darwin|Linux|SunOS|SCO_SV
 hardwaremodel           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
-hostname                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+hostname                all
 id
 interfaces
 ipaddress               AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
