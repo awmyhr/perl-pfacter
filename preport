@@ -1,0 +1,346 @@
+#!/usr/bin/perl
+
+BEGIN { unshift @INC, './lib'; }
+
+# pfacter, Collect and display facts about the system.
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+our $VERSION = '0.5b';
+
+use Getopt::Long;
+use strict;
+use POSIX qw(strftime);
+
+my ($Hostname, $TimeStamp, $Environment, $TID, $Message);
+
+chomp($Hostname =  qx( /bin/hostname )) if ( -e '/bin/hostname' );
+chomp($Hostname =  qx( /usr/bin/hostname )) if ( -e '/usr/bin/hostname' );
+$TimeStamp = strftime "%F %T.0000000 %z", localtime;
+$Environment = "development";
+$TID = transaction_id();
+
+$Message = <<END;
+--- !ruby/object:Puppet::Transaction::Report
+  transaction_uuid: "$TID"
+  host: $Hostname
+  time: $TimeStamp
+  puppet_version: "p$VERSION"
+  environment: $Environment
+  resource_statuses: 
+    Schedule[never]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[never]
+      file: 
+      line: 
+      evaluation_time: 0.000143
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - never
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: never
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[never]
+    Schedule[monthly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[monthly]
+      file: 
+      line: 
+      evaluation_time: 0.000138
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - monthly
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: monthly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[monthly]
+    Schedule[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[puppet]
+      file: 
+      line: 
+      evaluation_time: 0.000139
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - puppet
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[puppet]
+    Exec[keys_true]: !ruby/object:Puppet::Resource::Status
+      resource: Exec[keys_true]
+      file: /root/tmp/test.pp
+      line: 4
+      evaluation_time: 0.06322
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - exec
+        - class
+        - keys_true
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Exec
+      title: keys_true
+      skipped: false
+      failed: false
+      containment_path: 
+        - Stage[main]
+        - Main
+        - Exec[keys_true]
+    Exec[keys_false]: !ruby/object:Puppet::Resource::Status
+      resource: Exec[keys_false]
+      file: /root/tmp/test.pp
+      line: 8
+      evaluation_time: 0.126967
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - keys_false
+        - exec
+        - class
+      time: $TimeStamp
+      events: 
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: returns
+          previous_value: !ruby/sym notrun
+          desired_value: 
+            - "0"
+          historical_value: 
+          message: "executed successfully"
+          name: !ruby/sym executed_command
+          status: success
+          time: $TimeStamp
+      out_of_sync: false
+      changed: false
+      resource_type: Exec
+      title: keys_false
+      skipped: false
+      failed: false
+      containment_path: 
+        - Stage[main]
+        - Main
+        - Exec[keys_false]
+    Schedule[daily]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[daily]
+      file: 
+      line: 
+      evaluation_time: 0.000168
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - daily
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: daily
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[daily]
+    Schedule[weekly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[weekly]
+      file: 
+      line: 
+      evaluation_time: 0.000136
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - weekly
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: weekly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[weekly]
+    Schedule[hourly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[hourly]
+      file: 
+      line: 
+      evaluation_time: 0.000312
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - hourly
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: hourly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[hourly]
+    Filebucket[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Filebucket[puppet]
+      file: 
+      line: 
+      evaluation_time: 0.000189
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - puppet
+        - filebucket
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Filebucket
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Filebucket[puppet]
+  configuration_version: "SCOstatic"
+  status: changed
+  kind: apply
+  metrics: 
+    time: !ruby/object:Puppet::Util::Metric
+      name: time
+      values: 
+        - - total
+          - Total
+          - 0.312724
+        - - exec
+          - Exec
+          - 0.190187
+        - - config_retrieval
+          - "Config retrieval"
+          - 0.121312
+        - - schedule
+          - Schedule
+          - 0.001036
+        - - filebucket
+          - Filebucket
+          - 0.000189
+      label: Time
+    resources: !ruby/object:Puppet::Util::Metric
+      name: resources
+      values: 
+        - - failed
+          - Failed
+          - 0
+        - - total
+          - Total
+          - 9
+        - - scheduled
+          - Scheduled
+          - 0
+        - - skipped
+          - Skipped
+          - 0
+        - - restarted
+          - Restarted
+          - 0
+        - - out_of_sync
+          - "Out of sync"
+          - 0
+        - - failed_to_restart
+          - "Failed to restart"
+          - 0
+        - - changed
+          - Changed
+          - 0
+      label: Resources
+    changes: !ruby/object:Puppet::Util::Metric
+      name: changes
+      values: 
+        - - total
+          - Total
+          - 1
+      label: Changes
+    events: !ruby/object:Puppet::Util::Metric
+      name: events
+      values: 
+        - - total
+          - Total
+          - 1
+        - - success
+          - Success
+          - 1
+        - - failure
+          - Failure
+          - 0
+      label: Events
+  logs: 
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - info
+      time: $TimeStamp
+      source: preport
+      message: "SCO server check-in"
+      level: !ruby/sym info
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - keys_false
+        - exec
+        - class
+        - notice
+      time: $TimeStamp
+      line: 8
+      source: /Stage[main]/Main/Exec[keys_false]/returns
+      file: /root/tmp/test.pp
+      message: "executed successfully"
+      level: !ruby/sym notice
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - notice
+      time: $TimeStamp
+      source: Puppet
+      message: "Finished catalog run quickly"
+      level: !ruby/sym notice
+  report_format: 4
+END
+
+print $Message;
+
+sub transaction_id {
+    my $num = sprintf("%x", int( rand(4294967295) )) . "-" . sprintf("%x", int( rand(65535) ));
+    $num = $num . "-" . sprintf("%x", int( rand(65535) )) . "-" . sprintf("%x", int( rand(65535) ));;
+    $num = $num . "-" . sprintf("%x", int( rand(281474976710655) ));
+    return $num;
+}
+
+1;
+
