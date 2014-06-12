@@ -41,6 +41,7 @@ sub modulelist {
     } else {
         push @modules, qw(
 
+            _timestamp
             architecture
             domain
             filesystems
@@ -64,6 +65,7 @@ sub modulelist {
             processor0
             processorcount
             serialnumber
+            timezone
             swapsize
             uniqueid
             uptime

@@ -18,13 +18,8 @@ BEGIN { unshift @INC, './lib'; }
 
 our $VERSION = '2.00b';
 
-
-
 use Getopt::Long;
-
 use strict;
-
-
 
 # Initialize the package
 my $self = pfacter->init();
@@ -400,7 +395,7 @@ sub init {
 
         use Pfacter;
         @ARGV = Pfacter->modulelist( $self->{'pfact'}->{'kernel'}, $self->{'var'}->{'ver1'} );
-
+        
         # Read in all facts in --moduledir if specified
         if ( $self->{'var'}->{'moduledir'} ) {
             my $moduledir = $self->{'var'}->{'moduledir'};
@@ -516,7 +511,5 @@ sub DESTROY {
 
     $self->{'LDAP'}->unbind() if $self->{'LDAP'};
 }
-
-
 
 1;
