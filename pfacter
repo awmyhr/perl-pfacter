@@ -28,7 +28,6 @@ $self->debug( "Output module list: [ @ARGV ]" );
 
 if ( $self->{'var'}->{'json'} && $self->{'var'}->{'wire2'} ) {
     print '{"name": "' . $self->pfact('fqdn') . '",' . "\n";
-    print ' "environment": "development",' . "\n";
     print ' "values": {' . "\n";
 } elsif ( $self->{'var'}->{'json'} ) {
     print "{\n";
