@@ -7,7 +7,7 @@ WriteMakefile(
     NAME                => 'Pfacter',
     ABSTRACT            => 'Collect and display facts about the system',
     AUTHOR              => 'Scott Schneider <sschneid@gmail.com>',
-    VERSION_FROM        => 'pfacter',
+    VERSION_FROM        => 'bin/pfacter',
     PL_FILES            => {},
     PREREQ_PM => {
         'Getopt::Long' => 0,
