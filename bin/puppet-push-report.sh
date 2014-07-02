@@ -2,7 +2,7 @@
 
 HOME=/home/bofh
 HOST=`hostname`
-ENVIRONMENT=development
+ENVIRONMENT=`cat /etc/environment`
 CERT="--cert $HOME/openssl/certs/${HOST}.pem --key $HOME/openssl/private_keys/${HOST}.pem --cacert $HOME/openssl/ca/ca_crt.pem"
 
 rm $HOME/etc/report.yaml
