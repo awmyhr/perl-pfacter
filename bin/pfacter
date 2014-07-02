@@ -2,7 +2,7 @@
 
 package pfacter;
 
-BEGIN { unshift @INC, './lib'; }
+BEGIN { unshift @INC, './lib', '~/lib', '~/lib/perl5'; }
 
 # pfacter, Collect and display facts about the system.
 #
