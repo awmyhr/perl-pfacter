@@ -16,7 +16,7 @@ BEGIN { unshift @INC, './lib'; }
 # FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 # details.
 
-our $VERSION = '2.00b';
+our $VERSION = '2.0.1b';
 
 use Getopt::Long;
 use strict;
