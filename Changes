@@ -1,5 +1,13 @@
 Revision history for pfacter
 
+2.00b
+* Wed Jul 09 2014 awmyhr <awmyhr@gmail.com>
+- JSON output
+- Updated readme to markdown format
+- Started adding modules to emulate facter 2.0
+- Begin working on script to send puppet-compatible report file
+- Fixes to make and pathing
+
 1.14
 * Mon Jun 09 2014 awmyhr <awmyhr@gmail.com>
 - Added SCO support for most modules
