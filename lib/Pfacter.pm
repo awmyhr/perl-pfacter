@@ -44,7 +44,7 @@ sub modulelist {
             _timestamp
             architecture
             domain
-            environment
+            orgenv
             filesystems
             fqdn
             hardwareisa

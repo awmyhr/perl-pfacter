@@ -1,4 +1,4 @@
-package Pfacter::environment;
+package Pfacter::orgenv;
 
 #
 
@@ -8,6 +8,7 @@ sub pfact {
 
     my ( $r );
 
+    # NOTE: whis will not work for AIX
     if ( -e '/etc/environment' ) {
         open envFile, '/etc/environment' || return( 0 );
         $r = <envFile>;
