@@ -60,6 +60,7 @@ sub modulelist {
             netmask
             operatingsystem
             operatingsystemrelease
+            os
             osfamily
             physicalprocessorcount
             processor
