@@ -6,11 +6,15 @@ sub pfact {
     my $self  = shift;
     my ( $p ) = shift->{'pfact'};
 
-    my ( $r );
+    my @dirs = ($ENV{"HOME"} . '/etc/puppet/orgenv', '/etc/puppet/orgenv', '/etc/environment');
+    my ( $r, $f );
 
-    # NOTE: whis will not work for AIX
-    if ( -e '/etc/environment' ) {
-        open envFile, '/etc/environment' || return( 0 );
+    foreach (@dirs){
+        if ( -e $_ ) { $f = $_; }
+    }
+    
+    if ( -e $f ) {
+        open envFile, $f || return( 0 );
         $r = <envFile>;
         close envFile;
 
