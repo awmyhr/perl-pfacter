@@ -1,0 +1,6 @@
+[rhel-dvd]
+name=RHEL $releasever - $basearch - DVD
+baseurl=file:///media/
+enabled=0
+gpgcheck=1
+gpgkey=file:///media/RPM-GPG-KEY-redhat-release
