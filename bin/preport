@@ -1,0 +1,345 @@
+#!/usr/bin/perl
+
+BEGIN { unshift @INC, './lib', '~/lib', './lib/perl5', '~/lib/perl5'; }
+
+# pfacter, Collect and display facts about the system.
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+our $VERSION = '0.7b';
+
+use Getopt::Long;
+use strict;
+use POSIX qw(strftime);
+
+my ($Hostname, $TimeStamp, $Environment, $TID, $Message);
+my ($return_message, $md5_old, $md5_new);
+my $Files = $ENV{"HOME"} . '/etc/puppet';
+
+if ( -e '/bin/hostname' ) {
+    chomp($Hostname    =  qx( /bin/hostname ));
+} elsif ( -e '/usr/bin/hostname' ) {
+    chomp($Hostname    =  qx( /usr/bin/hostname ));
+} else { die "Can not find hostname command.\n"; }
+
+if ( -r "${Files}/orgenv" ) {
+    chomp($Environment = qx( /bin/cat ${Files}/orgenv ));
+} else { die "Cannot find ${Files}/orgenv.\n" }
+
+if ( -r "${Files}/facts.old.md5" ) {
+    chomp($md5_old     = qx( /bin/cat ${Files}/facts.old.md5));
+} else { die "Cannot find ${Files}/facts.old.md5.\n" }
+
+if ( -r "${Files}/facts.new.md5" ) {
+    chomp($md5_new     = qx( /bin/cat ${Files}/facts.new.md5));
+} else { die "Cannot find ${Files}/facts.new.md5.\n" }
+
+$TimeStamp = strftime "%F %T.0000000 %z", localtime;
+$TID = transaction_id();
+
+$return_message = 'content changed \'{md5}' . $md5_old . '\' to \'{md5}' . $md5_new . '\'';
+
+$Message = <<END;
+--- !ruby/object:Puppet::Transaction::Report
+  metrics: 
+    time: !ruby/object:Puppet::Util::Metric
+      name: time
+      values: 
+        - - total
+          - Total
+          - 0.312724
+        - - exec
+          - Exec
+          - 0.190187
+        - - config_retrieval
+          - "Config retrieval"
+          - 0.121312
+        - - schedule
+          - Schedule
+          - 0.001036
+        - - filebucket
+          - Filebucket
+          - 0.000189
+      label: Time
+    resources: !ruby/object:Puppet::Util::Metric
+      name: resources
+      values: 
+        - - failed
+          - Failed
+          - 0
+        - - total
+          - Total
+          - 2
+        - - scheduled
+          - Scheduled
+          - 0
+        - - skipped
+          - Skipped
+          - 0
+        - - restarted
+          - Restarted
+          - 0
+        - - out_of_sync
+          - "Out of sync"
+          - 1
+        - - failed_to_restart
+          - "Failed to restart"
+          - 0
+        - - changed
+          - Changed
+          - 1
+      label: Resources
+    changes: !ruby/object:Puppet::Util::Metric
+      name: changes
+      values: 
+        - - total
+          - Total
+          - 1
+      label: Changes
+    events: !ruby/object:Puppet::Util::Metric
+      name: events
+      values: 
+        - - total
+          - Total
+          - 1
+        - - success
+          - Success
+          - 1
+        - - failure
+          - Failure
+          - 0
+      label: Events
+  resource_statuses: 
+    Schedule[never]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[never]
+      file: 
+      line: 
+      evaluation_time: 0.000143
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - never
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: never
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[never]
+    Schedule[monthly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[monthly]
+      file: 
+      line: 
+      evaluation_time: 0.000138
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - monthly
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: monthly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[monthly]
+    Schedule[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[puppet]
+      file: 
+      line: 
+      evaluation_time: 0.000139
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - puppet
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[puppet]
+    File[/etc/puppet/facts.yaml]: !ruby/object:Puppet::Resource::Status
+      resource: File[/etc/puppet/facts.yaml]
+      file: /etc/puppet/environments/development/modules/puppet/manifests/facts.pp
+      line: 11
+      evaluation_time: 0.116248
+      change_count: 1
+      out_of_sync_count: 1
+      tags: 
+        - file
+        - puppet
+        - facts
+        - class
+        - "puppet::facts"
+      time: $TimeStamp
+      events: 
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: content
+          previous_value: $md5_old
+          desired_value: $md5_new
+          historical_value: 
+          message: $return_message
+          name: !ruby/sym content_changed
+          status: success
+          time: $TimeStamp
+      out_of_sync: true
+      changed: true
+      resource_type: File
+      title: /etc/puppet/facts.yaml
+      skipped: false
+      failed: false
+      containment_path: 
+        - Stage[main]
+        - "Puppet::Facts"
+        - File[/etc/puppet/facts.yaml]
+    Schedule[daily]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[daily]
+      file: 
+      line: 
+      evaluation_time: 0.000168
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - daily
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: daily
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[daily]
+    Schedule[weekly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[weekly]
+      file: 
+      line: 
+      evaluation_time: 0.000136
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - weekly
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: weekly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[weekly]
+    Schedule[hourly]: !ruby/object:Puppet::Resource::Status
+      resource: Schedule[hourly]
+      file: 
+      line: 
+      evaluation_time: 0.000312
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - hourly
+        - schedule
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: hourly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[hourly]
+    Filebucket[puppet]: !ruby/object:Puppet::Resource::Status
+      resource: Filebucket[puppet]
+      file: 
+      line: 
+      evaluation_time: 0.000189
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - puppet
+        - filebucket
+      time: $TimeStamp
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Filebucket
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Filebucket[puppet]
+  logs: 
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - info
+      time: $TimeStamp
+      source: preport
+      message: "SCO server check-in"
+      level: !ruby/sym info
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - notice
+        - file
+        - puppet
+        - facts
+        - class
+        - "puppet::facts"
+      file: /etc/puppet/environments/development/modules/puppet/manifests/facts.pp
+      level: !ruby/sym notice
+      line: 11
+      message: $return_message
+      source: "/Stage[main]/Puppet::Facts/File[/etc/puppet/facts.yaml]/content"
+      time: $TimeStamp
+    - !ruby/object:Puppet::Util::Log
+      tags: 
+        - notice
+      time: $TimeStamp
+      source: Puppet
+      message: "Finished catalog run quickly"
+      level: !ruby/sym notice
+  host: $Hostname
+  time: $TimeStamp
+  kind: apply
+  report_format: 4
+  puppet_version: "p$VERSION"
+  configuration_version: "SCOstatic"
+  transaction_uuid: "$TID"
+  environment: $Environment
+  status: changed
+END
+
+print $Message;
+
+sub transaction_id {
+    my $num = sprintf("%x", int( rand(4294967295) )) . "-" . sprintf("%x", int( rand(65535) ));
+    $num = $num . "-" . sprintf("%x", int( rand(65535) )) . "-" . sprintf("%x", int( rand(65535) ));;
+    $num = $num . "-" . sprintf("%x", int( rand(281474976710655) ));
+    return $num;
+}
+
+1;
+

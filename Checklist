@@ -1,0 +1,133 @@
+Release 2.x Modules (for Facter 2.x):
+
+architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+augeasversion           #na
+blockdevice_{devicename}_size
+blockdevice_{devicename}_vendor
+blockdevice_{devicename}_model
+blockdevices
+boardmanufacturer
+boardproductname
+boardserialnumber
+cfkey
+domain                  all AIX|Linux|SunOS
+ec2_{EC2 INSTANCE DATA} #na
+ec2_userdata            #na
+facterversion           #will return pfacter version, prefixed w/'p'
+filesystems             AIX|Darwin|Linux|SunOS|SCO_SV
+ldom
+fqdn                    all
+gid
+hardwareisa             AIX|Darwin|Linux|SunOS|SCO_SV
+hardwaremodel           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+hostname                all
+id
+interfaces
+ipaddress               AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
+ipaddress_{NETWORK INTERFACE}
+ipaddress6
+ipaddress6_{NETWORK INTERFACE}
+iphostnumber
+is_virtual
+kernel                  all
+kernelmajversion
+kernelrelease           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernelversion           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+lsbdistcodename         Linux
+lsbdistdescription      Linux
+lsbdistid               Linux
+lsbdistrelease
+lsbmajdistrelease
+lsbminordistrelease
+lsbrelease              Linux
+macaddress              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
+macaddress_{NETWORK INTERFACE}
+macosx_buildversion
+macosx_productname
+macosx_productversion
+macosx_productversion_major
+macosx_productversion_minor
+manufacturer            AIX|Linux|SunOS|SCO_SV*
+memoryfree
+memorysize              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+netmask                 Darwin|Linux|SCO_SV*
+netmask_{NETWORK INTERFACE}
+network_{NETWORK INTERFACE}
+operatingsystem         AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+operatingsystemmajrelease
+operatingsystemrelease  SCO_SV
+osfamily                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV*
+path
+physicalprocessorcount  AIX|FreeBSD|Linux|SunOS|SCO_SV*
+processor               AIX|Darwin|Linux|SunOS|SCO_SV
+processor0              AIX|Darwin|Linux|SunOS|SCO_SV*
+processor{NUMBER}
+processorcount          AIX|FreeBSD|Linux|SunOS|SCO_SV
+productname
+ps
+puppetversion
+rubysitedir             #na
+rubyversion             #na
+selinux
+selinux_config_mode
+selinux_config_policy
+selinux_current_mode
+selinux_enforced
+selinux_policyversion
+serialnumber            AIX|Darwin|Linux|SCO_SV
+sp_{SYSTEM PROFILER DATA}
+sshdsakey
+sshecdsakey
+sshrsakey
+swapencrypted
+swapfree
+swapsize                AIX|Darwin|Linux|SunOS|SCO_SV
+timezone
+type
+uniqueid                AIX|Linux|SunOS
+uptime                  AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+uptime_days
+uptime_hours
+uptime_seconds
+uuid
+virtual
+vlans
+xendomains
+zfs_version
+zonename
+zones
+zpool_version
+
+
+Original (1.x) Modules (for Facter pre-2.0):
+
+architecture            AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+disk                    AIX|Darwin|Linux|SCO_SV*
+domain                  all AIX|Linux|SunOS
+filesystems             AIX|Darwin|Linux|SunOS|SCO_SV
+fqdn                    all
+hardwaremanufacturer    AIX|Linux|SunOS|SCO_SV*
+hardwaremodel           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+hardwareplatform        AIX|Darwin|Linux|SunOS|SCO_SV
+hardwareproduct         Darwin|Linux|SunOS
+hostname                AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+ipaddress               AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernel                  all
+kernelrelease           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+kernelversion           AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+localtime               all
+macaddress              AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+memory                  AIX|Darwin|Linux|SunOS
+memorytotal             AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+netmask                 Darwin|Linux|SCO_SV
+operatingsystem         AIX|Darwin|FreeBSD|Linux|SunOS|SCO_SV
+processor               AIX|Darwin|Linux|SunOS|SCO_SV
+processorcount          AIX|FreeBSD|Linux|SunOS|SCO_SV
+productid               Linux|SCO_SV
+serialnumber            AIX|Darwin|Linux
+swap                    AIX|Darwin|Linux|SunOS|SCO_SV
+uniqueid                AIX|Linux|SunOS
+
+(*) partially working/needs additional work
+
+
